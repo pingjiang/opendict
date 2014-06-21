@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ufwb version="1.8">
+    <grammar name="INFLATED grammar" start="id:21" author="平江" email="pingjiang1989@gmail.com" fileextension="inflated">
+        <description>Grammar for INFLATED files</description>
+        <structure name="ID2 INFLATED file" id="21" encoding="UTF-8" endian="little" signed="no">
+            <structure name="offsetTable" id="22">
+                <structure name="offset10B" id="23" repeatmin="34871" repeatmax="34871">
+                    <number name="word" id="24" fillcolor="00F9FF" type="integer" length="4"/>
+                    <number name="xml" id="25" type="integer" length="4"/>
+                    <number name="flags" id="26" type="integer" length="1"/>
+                    <number name="ref" id="27" fillcolor="00A2FF" type="integer" length="1"/>
+                </structure>
+            </structure>
+            <structure name="words" id="30" length="302139">
+                <number name="u0" id="46" type="integer" length="4"/>
+                <string name="word1" id="38" fillcolor="F1FB03" type="fixed-length" length="3"/>
+                <number name="u1" id="42" fillcolor="FF2600" type="integer" length="4"/>
+                <string name="word2" id="40" type="fixed-length" length="12"/>
+                <number name="u2" id="41" fillcolor="FF3500" type="integer" length="4"/>
+                <string name="word3" id="43" type="fixed-length" length="3"/>
+                <number name="u3" id="45" fillcolor="FF2700" type="integer" length="4"/>
+            </structure>
+            <structure name="xmls" id="32" length="0">
+                <string name="xml1" id="33" fillcolor="A1F905" type="fixed-length" length="1969"/>
+                <string name="remains" id="36" fillcolor="FF3DEC" type="fixed-length" length="remaining"/>
+            </structure>
+        </structure>
+    </grammar>
+</ufwb>

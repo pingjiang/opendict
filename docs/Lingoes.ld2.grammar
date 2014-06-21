@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ufwb version="1.8">
+    <grammar name="LD2 grammar" start="id:75" author="平江" email="pingjiang1989@gmail.com" fileextension="ld2">
+        <description>Grammar for LD2 files</description>
+        <scripts>
+            <script name="LD2Analyzer" type="ProcessResults" id="38">
+                <description>Lingoes Dictionary Analyzer</description>
+                <source language="Python">def init():
+	print &quot;hello init&quot;
+
+def processResult(result):
+	print &quot;hello result&quot;
+
+  	resultType = result.getType()
+
+	if resultType == RESULT_STRUCTURE_START_TYPE:
+		print(&quot;Structure Start&quot;)
+	else:
+		print(&quot;other&quot;)
+
+	level = result.getLevel()
+ 	print (level)
+
+	name = result.getName()
+
+	value = result.getValue()
+
+	if( value != None ):
+		type = value.getType()
+		if type == VALUE_BINARY:
+			startPos = result.getStartBytePos()
+			length = result.getByteLength()
+			byteView = result.getByteView()
+			for x in range(length):
+				byte = byteView.readByte(startPos + x)
+			print &quot;Binary&quot;
+		elif type == VALUE_NUMBER_UNSIGNED:
+			print &quot;Unsigned: &quot; + str(value.getUnsigned())
+		elif type == VALUE_NUMBER_SIGNED:
+			print &quot;Signed: &quot; + str(value.getSigned())
+		elif type == VALUE_NUMBER_FLOAT:
+			print &quot;Float: &quot; + str(value.getFloat())
+		elif type == VALUE_STRING:
+			print &quot;String: &quot; + value.getString()
+
+	print result.getStringRepresentation()
+
+def terminate():
+	print &quot;hello terminate&quot;
+</source>
+            </script>
+        </scripts>
+        <structure name="LD2 file" id="75" length="0" encoding="ANSI_X3.4-1968" endian="little" signed="no">
+            <description>Lingoes dictionary file</description>
+            <structure name="Header" id="76">
+                <number name="Type" id="77" type="integer" length="4" display="hex"/>
+                <binary name="Checksum" id="78" fillcolor="FF4CDA" length="20"/>
+                <number name="majorVersion" id="79" type="integer" length="2"/>
+                <number name="minorVersion" id="80" type="integer" length="2"/>
+                <number name="ID" id="81" type="integer" length="8" display="hex"/>
+                <binary name="Padding" id="82" length="56"/>
+                <number name="Offset" id="83" type="integer" length="4"/>
+            </structure>
+            <binary name="?" id="85" fillcolor="ADFCD0" length="6448"/>
+            <structure name="Info" id="86">
+                <number name="Type" id="87" fillcolor="FF6045" type="integer" length="4"/>
+                <number name="总长度=base+4+4+this" id="88" type="integer" length="4"/>
+                <number name="索引长度（压缩头开始位置）" id="89" type="integer" length="4"/>
+                <number name="解压后的索引长度" id="90" type="integer" length="4"/>
+                <number name="解压后的单词总数" id="91" type="integer" length="4"/>
+                <number name="解压后的XML总数" id="92" type="integer" length="4"/>
+                <number name="总长度=this+相对偏移+20" id="93" type="integer" length="4"/>
+            </structure>
+            <structure name="indexIntList" id="95" length="136580">
+                <number name="indexInt" id="96" fillcolor="5B58FF" repeatmin="34145" repeatmax="34145" type="integer" length="4"/>
+            </structure>
+            <number name="?1" id="98" type="integer" length="4"/>
+            <number name="?2" id="99" type="integer" length="4"/>
+            <structure name="intList" id="100" length="0">
+                <number name="int1" id="101" fillcolor="FF4000" repeatmin="1176" repeatmax="1176" type="integer" length="4"/>
+            </structure>
+            <structure name="blocks" id="103" length="5819600">
+                <binary name="block1" id="104" fillcolor="7DF935" length="8005"/>
+            </structure>
+            <structure name="s?" id="106" length="32">
+                <number name="i?" id="107" fillcolor="00FCFC" repeatmin="8" repeatmax="8" type="integer" length="4"/>
+            </structure>
+        </structure>
+    </grammar>
+</ufwb>
